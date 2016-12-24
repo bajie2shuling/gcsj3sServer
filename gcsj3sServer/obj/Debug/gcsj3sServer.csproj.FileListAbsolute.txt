@@ -7,3 +7,5 @@ E:\实践工程\gcsj3sServer\gcsj3sServer\obj\Debug\gcsj3sServer.Properties.Reso
 E:\实践工程\gcsj3sServer\gcsj3sServer\obj\Debug\gcsj3sServer.csproj.GenerateResource.Cache
 E:\实践工程\gcsj3sServer\gcsj3sServer\obj\Debug\gcsj3sServer.exe
 E:\实践工程\gcsj3sServer\gcsj3sServer\obj\Debug\gcsj3sServer.pdb
+E:\实践工程\gcsj3sServer\gcsj3sServer\bin\Debug\MySql.Data.dll
+E:\实践工程\gcsj3sServer\gcsj3sServer\bin\Debug\MySql.Data.xml

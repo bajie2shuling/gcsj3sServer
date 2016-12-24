@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Net;  //需要引入的命名空间
 using System.Net.Sockets;
 using System.Threading;
+using MySql.Data.MySqlClient;
 
 namespace gcsj3sServer
 {
@@ -133,16 +134,20 @@ namespace gcsj3sServer
                         collectData = frame.Substring(1, 2);
                         collectTime = frame.Substring(3);
 
-                        tbxTemp.BeginInvoke(miTemp,new object[] { collectData});
+                        tbxTemp.BeginInvoke(miTemp,new object[] { collectData});//显示
                         tbxTempTime.BeginInvoke(miTempTime, new object[] { collectTime });
+
+                        insertData(Convert.ToInt32(deviceId),collectData,collectTime);//插入数据库
                     }
                     else if(deviceId == "2")
                     {
                         collectData = frame.Substring(1, 3);
                         collectTime = frame.Substring(4);
 
-                        tbxGas.BeginInvoke(miGas,new object[] { collectData});
+                        tbxGas.BeginInvoke(miGas,new object[] { collectData});//显示
                         tbxGasTime.BeginInvoke(miGasTime,new object[] { collectTime});
+
+                        insertData(Convert.ToInt32(deviceId), collectData, collectTime);//插入数据库
                     }
                 }
             }
@@ -193,6 +198,19 @@ namespace gcsj3sServer
         private void btnEsc_Click(object sender, EventArgs e)  //关闭窗体程序
         {
             this.Close();
+        }
+
+        private void insertData(int id, String collectData, String collectTime)
+        {
+            String con = "Server = localhost;Database = gcsj;Uid = root;Pwd = wjz520mysql";
+            String sql = "INSERT INTO  device(deviceId,collectData,collectTime) VALUES('"+id+"','"+collectData+"','"+collectTime+"')";
+            MySqlConnection myCon = new MySqlConnection(con);
+            myCon.Open();
+            MySqlCommand myCom = new MySqlCommand(sql, myCon);
+            myCom.ExecuteNonQuery();
+            myCom.Dispose();
+            myCon.Close();
+            myCon.Dispose();
         }
     }
 }
