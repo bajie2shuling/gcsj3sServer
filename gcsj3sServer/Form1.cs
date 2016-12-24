@@ -11,6 +11,7 @@ using System.Net;  //需要引入的命名空间
 using System.Net.Sockets;
 using System.Threading;
 using MySql.Data.MySqlClient;
+using System.Security.Cryptography;
 
 namespace gcsj3sServer
 {
@@ -87,6 +88,19 @@ namespace gcsj3sServer
             tbxGasTime.Text = "";
         }
 
+        private String Decrypt(String decryptStr)  //AES解密函数
+        {
+            byte[] keyArray = UTF8Encoding.UTF8.GetBytes("12345678901234567890123456789012");
+            byte[] toEncryptArray = Convert.FromBase64String(decryptStr);
+            RijndaelManaged rDel = new RijndaelManaged();
+            rDel.Key = keyArray;
+            rDel.Mode = CipherMode.ECB;
+            rDel.Padding = PaddingMode.PKCS7;
+            ICryptoTransform cTransform = rDel.CreateDecryptor();  //创建解密器
+            byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
+            return UTF8Encoding.UTF8.GetString(resultArray);  //返回解密后的信息的字符串格式
+        }
+
         private void startServer()
         {
             myInvokeUpdateTbx miCon = new myInvokeUpdateTbx(updateTbxConInfo);  //创建委托对象跨线程更新TbxConInfo内容
@@ -95,7 +109,7 @@ namespace gcsj3sServer
             myInvokeUpdateTbx miGas = new myInvokeUpdateTbx(updateTbxGas);
             myInvokeUpdateTbx miGasTime = new myInvokeUpdateTbx(updateTbxGasTime);
             int recvlen;  //用于表示客户端发送的信息长度  
-            byte[] data = new byte[1024];   //用于缓存客户端所发送的信息,通过socket传递的信息必须为字节数组 
+            byte[] bytebuf = new byte[1024];   //用于缓存客户端所发送的信息,通过socket传递的信息必须为字节数组 
             Socket newsock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint ipep = new IPEndPoint(IPAddress.Any, 9050);  //本机预使用的IP和端口  
             newsock.Bind(ipep);  //绑定  
@@ -113,18 +127,19 @@ namespace gcsj3sServer
             tbxConInfo.BeginInvoke(miCon, new object[] { clientInfo });  //TbxConInfo中显示客户端信息
 
             string welcome = "connected successful ,welcome here!";  //向客户端发送连接成功的反馈信息
-            data = Encoding.ASCII.GetBytes(welcome);
-            response.Send(data, data.Length, SocketFlags.None);//发送信息  
+            bytebuf = Encoding.ASCII.GetBytes(welcome);
+            response.Send(bytebuf, bytebuf.Length, SocketFlags.None);//发送信息  
 
             while (true)
             {//用死循环来不断的从客户端获取信息 
                 if (isRecv)
                 { 
-                    data = new byte[1024];
+                    byte[] data = new byte[1024];
                     recvlen = response.Receive(data);
                     if (recvlen == 0)//当信息长度为0，说明客户端连接断开  
                         break;
-                    String frame = Encoding.ASCII.GetString(data ,0 ,recvlen);  //将接收的字节转化为字符串帧
+                    String strbuf = Encoding.ASCII.GetString(data,0,recvlen);
+                    String frame = Decrypt(strbuf);  //将接收的字节转化为字符串帧
 
                     String deviceId = frame.Substring(0,1);  //字符串按照设备ID不同进行分割
                     String collectData = null;
