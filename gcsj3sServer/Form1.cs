@@ -217,8 +217,8 @@ namespace gcsj3sServer
 
         private void insertData(int id, String collectData, String collectTime)
         {
-            String con = "Server = localhost;Database = gcsj;Uid = root;Pwd = wjz520mysql";
-            String sql = "INSERT INTO  device(deviceId,collectData,collectTime) VALUES('"+id+"','"+collectData+"','"+collectTime+"')";
+            String con = "Server = localhost;Database = forest;Uid = root;Pwd = wjz520mysql";
+            String sql = "INSERT INTO  sensorData(DeviceId,Data,CollectTime) VALUES('" + id+"','"+collectData+"','"+collectTime+"')";
             MySqlConnection myCon = new MySqlConnection(con);
             myCon.Open();
             MySqlCommand myCom = new MySqlCommand(sql, myCon);
@@ -226,6 +226,9 @@ namespace gcsj3sServer
             myCom.Dispose();
             myCon.Close();
             myCon.Dispose();
+            myInvokeUpdateTbx miCon = new myInvokeUpdateTbx(updateTbxConInfo);  //创建委托对象跨线程更新TbxConInfo内容
+            String time = DateTime.Now.ToString("yyyy-MM-dd  HH:mm:ss");
+            tbxConInfo.BeginInvoke(miCon,new object[] { "插入数据成功！" + time});
         }
     }
 }
