@@ -20,3 +20,6 @@ E:\实践工程\工程实践4 v1\实践代码\gcsj3sServer\gcsj3sServer\obj\Debu
 E:\实践工程\工程实践4 v1\实践代码\gcsj3sServer\gcsj3sServer\obj\Debug\gcsj3sServer.Form1.resources
 E:\实践工程\工程实践4 v1\实践代码\gcsj3sServer\gcsj3sServer\obj\Debug\gcsj3sServer.Properties.Resources.resources
 E:\实践工程\工程实践4 v1\实践代码\gcsj3sServer\gcsj3sServer\obj\Debug\gcsj3sServer.csproj.GenerateResource.Cache
+E:\实践工程\工程实践4 v2\实践代码\gcsj3sServer\gcsj3sServer\bin\Debug\gcsj3sServer.exe.config
+E:\实践工程\工程实践4 v2\实践代码\gcsj3sServer\gcsj3sServer\obj\Debug\gcsj3sServer.exe
+E:\实践工程\工程实践4 v2\实践代码\gcsj3sServer\gcsj3sServer\obj\Debug\gcsj3sServer.pdb
