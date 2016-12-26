@@ -144,25 +144,39 @@ namespace gcsj3sServer
                     String deviceId = frame.Substring(0,1);  //字符串按照设备ID不同进行分割
                     String collectData = null;
                     String collectTime = null;
-                    if (deviceId == "1")
+                    if (deviceId == "1")  //1代表温度
                     {
                         collectData = frame.Substring(1, 2);
                         collectTime = frame.Substring(3);
+                        String status = null;   //温度是否正常
+
+                        int bufdata = Convert.ToInt32(collectData);
+                        if (bufdata < 18)
+                            status = "正常";
+                        else
+                            status = "异常";
 
                         tbxTemp.BeginInvoke(miTemp,new object[] { collectData});//显示
                         tbxTempTime.BeginInvoke(miTempTime, new object[] { collectTime });
 
-                        insertData(Convert.ToInt32(deviceId),collectData,collectTime);//插入数据库
+                        insertData(Convert.ToInt32(deviceId),collectData,collectTime,status);//插入数据库
                     }
-                    else if(deviceId == "2")
+                    else if(deviceId == "2")  //2代表气体
                     {
                         collectData = frame.Substring(1, 3);
                         collectTime = frame.Substring(4);
+                        String status = null;   //气体是否正常
+
+                        int bufdata = Convert.ToInt32(collectData);
+                        if (bufdata < 45)
+                            status = "正常";
+                        else
+                            status = "异常";
 
                         tbxGas.BeginInvoke(miGas,new object[] { collectData});//显示
                         tbxGasTime.BeginInvoke(miGasTime,new object[] { collectTime});
 
-                        insertData(Convert.ToInt32(deviceId), collectData, collectTime);//插入数据库
+                        insertData(Convert.ToInt32(deviceId), collectData, collectTime,status);//插入数据库
                     }
                 }
             }
@@ -215,10 +229,10 @@ namespace gcsj3sServer
             this.Close();
         }
 
-        private void insertData(int id, String collectData, String collectTime)
+        private void insertData(int id, String collectData, String collectTime,String status)
         {
             String con = "Server = localhost;Database = forest;Uid = root;Pwd = wjz520mysql";
-            String sql = "INSERT INTO  sensorData(DeviceId,Data,CollectTime) VALUES('" + id+"','"+collectData+"','"+collectTime+"')";
+            String sql = "INSERT INTO  sensorData(DeviceId,Data,CollectTime,Status) VALUES('" + id+"','"+collectData+"','"+collectTime+"','"+status+"')";
             MySqlConnection myCon = new MySqlConnection(con);
             myCon.Open();
             MySqlCommand myCom = new MySqlCommand(sql, myCon);

@@ -60,9 +60,9 @@
             this.RightPanel.Controls.Add(this.labGasTime);
             this.RightPanel.Controls.Add(this.labGas);
             this.RightPanel.Controls.Add(this.labTemp);
-            this.RightPanel.Location = new System.Drawing.Point(204, 2);
+            this.RightPanel.Location = new System.Drawing.Point(236, 1);
             this.RightPanel.Name = "RightPanel";
-            this.RightPanel.Size = new System.Drawing.Size(731, 557);
+            this.RightPanel.Size = new System.Drawing.Size(725, 557);
             this.RightPanel.TabIndex = 2;
             // 
             // labTempTime
@@ -178,12 +178,12 @@
             this.LeftPanel.Controls.Add(this.btnStartServer);
             this.LeftPanel.Location = new System.Drawing.Point(2, 2);
             this.LeftPanel.Name = "LeftPanel";
-            this.LeftPanel.Size = new System.Drawing.Size(202, 557);
+            this.LeftPanel.Size = new System.Drawing.Size(228, 556);
             this.LeftPanel.TabIndex = 3;
             // 
             // btnClearBuf
             // 
-            this.btnClearBuf.Location = new System.Drawing.Point(53, 331);
+            this.btnClearBuf.Location = new System.Drawing.Point(70, 324);
             this.btnClearBuf.Name = "btnClearBuf";
             this.btnClearBuf.Size = new System.Drawing.Size(88, 33);
             this.btnClearBuf.TabIndex = 14;
@@ -193,7 +193,7 @@
             // 
             // btnEsc
             // 
-            this.btnEsc.Location = new System.Drawing.Point(53, 416);
+            this.btnEsc.Location = new System.Drawing.Point(70, 397);
             this.btnEsc.Name = "btnEsc";
             this.btnEsc.Size = new System.Drawing.Size(88, 33);
             this.btnEsc.TabIndex = 11;
@@ -203,7 +203,7 @@
             // 
             // btnStopRecv
             // 
-            this.btnStopRecv.Location = new System.Drawing.Point(53, 246);
+            this.btnStopRecv.Location = new System.Drawing.Point(70, 251);
             this.btnStopRecv.Name = "btnStopRecv";
             this.btnStopRecv.Size = new System.Drawing.Size(88, 33);
             this.btnStopRecv.TabIndex = 10;
@@ -213,7 +213,7 @@
             // 
             // btnStratRecv
             // 
-            this.btnStratRecv.Location = new System.Drawing.Point(53, 161);
+            this.btnStratRecv.Location = new System.Drawing.Point(70, 178);
             this.btnStratRecv.Name = "btnStratRecv";
             this.btnStratRecv.Size = new System.Drawing.Size(88, 33);
             this.btnStratRecv.TabIndex = 9;
@@ -223,7 +223,7 @@
             // 
             // btnStartServer
             // 
-            this.btnStartServer.Location = new System.Drawing.Point(53, 76);
+            this.btnStartServer.Location = new System.Drawing.Point(70, 105);
             this.btnStartServer.Name = "btnStartServer";
             this.btnStartServer.Size = new System.Drawing.Size(88, 33);
             this.btnStartServer.TabIndex = 8;
@@ -235,7 +235,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(937, 563);
+            this.ClientSize = new System.Drawing.Size(963, 562);
             this.Controls.Add(this.LeftPanel);
             this.Controls.Add(this.RightPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
